@@ -4,6 +4,7 @@ MAINTAINER Kazuki Fukui
 
 ENV HS_VERSION 3.4.1
 RUN apt-get -q update && \
+    apt-get upgrade -y && \
     apt-get -qy --no-install-recommends install wget && \
     apt-get -y autoremove && \
     apt-get clean && \
@@ -15,6 +16,7 @@ RUN apt-get -q update && \
     rm -rf v${HS_VERSION}.tar.gz
 
 WORKDIR /hubot-slack-{SLACKHQ_VERSION}
+COPY external-scripts.json ./external-scripts.json
 
 RUN npm install
 
