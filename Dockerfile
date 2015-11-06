@@ -8,7 +8,7 @@ RUN apt-get -q update && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    npm install -g yo generator-hubot coffee-script && \
+    npm install -g yo generator-hubot coffee-script hubot-zabbix-notifier hubot-redmine-notifier && \
     npm cache clean && \
     wget --no-check-certificate https://github.com/slackhq/hubot-slack/archive/v${SLACKHQ_VERSION}.tar.gz && \
     tar xf v${SLACKHQ_VERSION}.tar.gz && \
