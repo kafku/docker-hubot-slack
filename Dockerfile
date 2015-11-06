@@ -2,18 +2,20 @@ FROM node:latest
 
 MAINTAINER Kazuki Fukui
 
-RUN apt-get -q update
-RUN apt-get -qy install git-core redis-server
+ENV SLACKHQ_VERSION 3.4.1
+RUN apt-get -q update && \
+    apt-get -qy --no-install-recommends install wget && \
+    apt-get -y autoremove && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    npm install -g yo generator-hubot coffee-script && \
+    npm cache clean && \
+    wget --no-check-certificate https://github.com/slackhq/hubot-slack/archive/v${SLACKHQ_VERSION}.tar.gz && \
+    tar xf v${SLACKHQ_VERSION}.tar.gz && \
+    rm -rf v${SLACKHQ_VERSION}.tar.gz
 
-RUN npm install -g yo generator-hubot coffee-script
+WORKDIR /hubot-slack-{SLACKHQ_VERSION}
 
-RUN adduser --disabled-password --gecos "" yeoman; \
-  echo "yeoman ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-ENV HOME /home/yeoman
-USER yeoman
-WORKDIR /home/yeoman
+RUN npm install
 
-RUN git clone https://github.com/cataska/slack-hubot.git hubot
-RUN cd hubot; npm install
-
-CMD cd hubot; bin/hubot --adapter slack
+CMD ./bin/hubot --adapter slack
