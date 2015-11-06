@@ -7,7 +7,7 @@ RUN apt-get -q update && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    npm install -g hubot coffee-script  && \
+    npm install -g yo generator-hubot hubot coffee-script  && \
     mkdir myhubot && \
     cd myhubot && \
     yo hubot && \
