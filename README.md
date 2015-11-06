@@ -7,5 +7,5 @@ Docker for hubot and slack integration with the follwing modules.
 
 ## usage
 ```bash
-docker run -d -e 'HUBOT_SLACK_TOKEN=your_token' cataska/hubot-slack
+docker run -d -e 'HUBOT_SLACK_TOKEN=your_token' kafku/hubot-slack
 ```
