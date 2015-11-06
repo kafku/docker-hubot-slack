@@ -1,4 +1,5 @@
 [
+ "hubot-slack",
  "hubot-redmine-notifier", 
  "hubot-zabbix-notifier"
 ]
