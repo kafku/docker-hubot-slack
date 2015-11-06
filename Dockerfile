@@ -8,8 +8,9 @@ RUN apt-get -q update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     npm install -g hubot coffee-script  && \
-    hubot --create myhubot && \
+    mkdir myhubot && \
     cd myhubot && \
+    yo hubot && \
     npm install --save hubot-slack hubot-zabbix-notifier hubot-redmine-notifier && \
     npm install && \
     npm cache clean
