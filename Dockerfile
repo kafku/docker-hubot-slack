@@ -2,6 +2,8 @@ FROM node:latest
 
 MAINTAINER Kazuki Fukui
 
+WORKDIR /root
+
 RUN apt-get -q update && \
     apt-get -qy upgrade && \
     apt-get -y autoremove && \
@@ -15,7 +17,10 @@ RUN apt-get -q update && \
     npm install && \
     npm cache clean
 
-WORKDIR /myhubot
+WORKDIR ./myhubot
 COPY external-scripts.json ./external-scripts.json
+
+ENV PORT 9009
+EXPOSE 9009
 
 CMD ./bin/hubot --adapter slack
