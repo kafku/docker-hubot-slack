@@ -9,6 +9,7 @@ RUN apt-get -q update && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /home/swuser && \
     groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -d /home/swuser -s /sbin/nologin -c "Docker image user" swuser && \
     chown -R swuser:swuser /home/swuser
