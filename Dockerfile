@@ -21,7 +21,7 @@ WORKDIR /home/swuser
 
 RUN mkdir myhubot && \
     cd myhubot && \
-    yo hubot && \
+    yo hubot --defaults && \
     npm install --save hubot-slack hubot-zabbix-notifier hubot-redmine-notifier && \
     npm install && \
     npm cache clean
