@@ -2,14 +2,21 @@ FROM node:latest
 
 MAINTAINER Kazuki Fukui
 
-WORKDIR /root
+USER root
 
 RUN apt-get -q update && \
     apt-get -qy upgrade && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    npm install -g yo generator-hubot hubot coffee-script  && \
+    groupadd -r swuser -g 433 && \
+    useradd -u 431 -r -g swuser -d /home/swuser -s /sbin/nologin -c "Docker image user" swuser && \
+    chown -R swuser:swuser /home/swuser
+
+USER swuser
+WORKDIR /home/swuser
+
+RUN npm install -g yo generator-hubot hubot coffee-script  && \
     mkdir myhubot && \
     cd myhubot && \
     yo hubot && \
