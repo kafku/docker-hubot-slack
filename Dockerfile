@@ -12,13 +12,14 @@ RUN apt-get -q update && \
     mkdir -p /home/swuser && \
     groupadd -r swuser -g 433 && \
     useradd -u 431 -r -g swuser -d /home/swuser -s /sbin/nologin -c "Docker image user" swuser && \
-    chown -R swuser:swuser /home/swuser
+    chown -R swuser:swuser /home/swuser &&\
+    npm install -g yo generator-hubot hubot coffee-script  && \
+    npm cache clean
 
 USER swuser
 WORKDIR /home/swuser
 
-RUN npm install -g yo generator-hubot hubot coffee-script  && \
-    mkdir myhubot && \
+RUN mkdir myhubot && \
     cd myhubot && \
     yo hubot && \
     npm install --save hubot-slack hubot-zabbix-notifier hubot-redmine-notifier && \
